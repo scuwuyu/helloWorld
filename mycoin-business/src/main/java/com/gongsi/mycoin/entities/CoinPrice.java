@@ -10,6 +10,8 @@ public class CoinPrice {
 
     private BigDecimal okex;
 
+    private BigDecimal bithumb;
+
     private BigDecimal percent;
 
     private Date createTime;
@@ -38,6 +40,14 @@ public class CoinPrice {
 
     public void setOkex(BigDecimal okex) {
         this.okex = okex;
+    }
+
+    public BigDecimal getBithumb() {
+        return bithumb;
+    }
+
+    public void setBithumb(BigDecimal bithumb) {
+        this.bithumb = bithumb;
     }
 
     public BigDecimal getPercent() {

@@ -8,6 +8,7 @@ package com.gongsi.mycoin.enums;
 public enum  PlatformEnum {
     HUOBI(1,"火币网"),
     OKEX(2,"OKEx"),
+    BITHUMB(3,"bithumb"),
     ;
 
     PlatformEnum(Integer id, String desc) {

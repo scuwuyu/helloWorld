@@ -6,6 +6,7 @@ import com.gongsi.mycoin.entities.CoinPrice;
 import com.gongsi.mycoin.response.huobi.Kline;
 import com.gongsi.mycoin.response.huobi.KlineResponse;
 import com.gongsi.mycoin.services.CoinPriceService;
+import com.gongsi.mycoin.services.api.ApiBithumbService;
 import com.gongsi.mycoin.services.api.ApiHuoBiService;
 import com.gongsi.mycoin.services.api.ApiOKExService;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +34,9 @@ public class KlineTask {
     private ApiOKExService apiOKExService;
 
     @Autowired
+    private ApiBithumbService apiBithumbService;
+
+    @Autowired
     private CoinPriceService coinPriceService;
 
     public void execute(){
@@ -42,6 +46,7 @@ public class KlineTask {
 
         queryHuoBi(list,coinPrice);
         queryOkex(list,coinPrice);
+        queryBithumb(list,coinPrice);
 
         list = list.stream().filter(Objects::nonNull).collect(Collectors.toList());
 
@@ -87,5 +92,14 @@ public class KlineTask {
         BigDecimal okexPrice = okexResponse.getTicker().getLast();
         list.add(okexPrice);
         coinPrice.setOkex(okexPrice);
+    }
+
+    /** 查询bithumb行情 */
+    private void queryBithumb(List<BigDecimal> list,CoinPrice coinPrice){
+        com.gongsi.mycoin.response.bithumb.KlineResponse okexResponse = apiBithumbService.kline("BTC","","",com.gongsi.mycoin.response.bithumb.KlineResponse.class);
+        // TODO: 2018-07-08 7495000  韩元赚美元
+        BigDecimal price = okexResponse.getData().getClosing_price();
+        list.add(price);
+        coinPrice.setBithumb(price);
     }
 }

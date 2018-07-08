@@ -5,6 +5,7 @@ CREATE TABLE `coin_price` (
   `id` BIGINT(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `huobi` DECIMAL(10,2) DEFAULT NULL COMMENT '火币网价格',
   `okex` DECIMAL(10,2) DEFAULT NULL COMMENT 'okex价格',
+  `bithumb` DECIMAL(10,2) DEFAULT NULL COMMENT 'bithumb价格',
 
   `percent` DECIMAL(10,2) NOT NULL DEFAULT '0' COMMENT '最大价差百分比',
 
