@@ -3,6 +3,8 @@ package com.gongsi.mycoin.services.api;
 import com.alibaba.fastjson.TypeReference;
 import com.gongsi.mycoin.enums.RequestMethod;
 import com.gongsi.mycoin.response.BaseResponse;
+import com.gongsi.mycoin.services.CoinAccountservice;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -15,6 +17,9 @@ import java.util.stream.Collectors;
  * Created by 吴宇 on 2018-07-07.
  */
 public abstract class AbstractApiService implements ApiService{
+
+    @Autowired
+    protected CoinAccountservice coinAccountservice;
 
     /** get请求 */
     protected <T extends BaseResponse> T get(String uri, Map<String, String> params, TypeReference<T> ref){

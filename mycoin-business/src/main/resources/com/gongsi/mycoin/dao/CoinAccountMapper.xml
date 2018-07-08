@@ -15,6 +15,19 @@
   <sql id="Base_Column_List" >
     id, user_id, app_key, app_secret, platform, create_time, update_time, status, comment
   </sql>
+
+  <select id="selectByPlatformId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from coin_account
+    where platform = #{platformId} AND status = 1
+  </select>
+
+
+
+
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

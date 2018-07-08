@@ -2,7 +2,10 @@ package com.gongsi.mycoin.services.api;
 
 import com.alibaba.fastjson.TypeReference;
 import com.gongsi.mycoin.constants.HuoBiConstants;
+import com.gongsi.mycoin.core.ensure.Ensure;
 import com.gongsi.mycoin.core.exception.BusinessException;
+import com.gongsi.mycoin.entities.CoinAccount;
+import com.gongsi.mycoin.enums.PlatformEnum;
 import com.gongsi.mycoin.enums.RequestMethod;
 import com.gongsi.mycoin.response.BaseResponse;
 import com.gongsi.mycoin.response.KlineResponse;
@@ -41,7 +44,10 @@ public class ApiHuoBiService extends AbstractApiService {
     /** 具体的请求方法*/
     @Override
     protected <T extends BaseResponse> T call(RequestMethod method, String uri, Object object, Map<String, String> params, TypeReference<T> ref) {
-        createSignature(HuoBiConstants.appKey,HuoBiConstants.appSecretKey,method,uri,params);
+        CoinAccount coinAccount = coinAccountservice.selectByPlatform(PlatformEnum.HUOBI);
+        Ensure.that(coinAccount).isNotNull("平台账号不能为空");
+
+        createSignature(coinAccount.getAppKey(),coinAccount.getAppSecret(),method,uri,params);
         switch (method){
             case GET:
                 return BaseService.exeGetJson(HuoBiConstants.API_URL+uri+"?"+toQueryString(params),ref);

@@ -11,6 +11,8 @@ public interface CoinAccountMapper {
 
     CoinAccount selectByPrimaryKey(Long id);
 
+    CoinAccount selectByPlatformId(Integer platformId);
+
     int updateByPrimaryKeySelective(CoinAccount record);
 
     int updateByPrimaryKey(CoinAccount record);
