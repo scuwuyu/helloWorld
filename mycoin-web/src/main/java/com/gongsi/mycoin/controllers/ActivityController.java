@@ -17,7 +17,7 @@ import java.util.List;
  * Created by 吴宇 on 2018-05-23.
  */
 @Controller
-@RequestMapping("/mini/activity")
+@RequestMapping("/mycoin/activity")
 public class ActivityController {
 
     @Autowired

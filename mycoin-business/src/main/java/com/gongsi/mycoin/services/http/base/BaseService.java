@@ -1,8 +1,10 @@
 package com.gongsi.mycoin.services.http.base;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.gongsi.mycoin.core.ensure.Ensure;
 import com.gongsi.mycoin.core.exception.BusinessException;
+import com.gongsi.mycoin.response.BaseResponse;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
@@ -27,10 +29,10 @@ public abstract class BaseService {
      * Content-Type = application/json
      * @param  requestUrl  请求url
      * @param  entity      请求参数
-     * @param  clazz       返回结果Entity class
+     * @param  ref       返回结果Entity class
      * @return T
      * */
-    public static <T>  T exePostJson(String requestUrl, Object entity, final Class<T> clazz) {
+    public static <T extends BaseResponse>  T exePostJson(String requestUrl, Object entity, final TypeReference<T> ref) {
         logger.info("[request]:" + requestUrl + ":" +  StringUtils.substring(JSON.toJSONString(entity),0,2000));
         return HttpClientUtils.getInstance().postJson(requestUrl, JSON.toJSONString(entity),
                 (response, charset) -> {
@@ -44,7 +46,9 @@ public abstract class BaseService {
             }
             String toString = IOUtils.toString(entity1.getContent(), charset);
             logger.info("[response]:" + StringUtils.substring(toString,0,2000));
-            return checkResult(JSON.parseObject(toString, clazz));
+            T result = JSON.parseObject(toString, ref);
+            Ensure.that("ok".equals(result.getStatus())).isTrue("查询请求报错");
+            return JSON.parseObject(toString, ref);
         });
     }
 
@@ -52,13 +56,13 @@ public abstract class BaseService {
     /**
      * method get
      * @param  requestUrl  请求url
-     * @param  clazz       返回结果Entity class
+     * @param  ref       返回结果Entity class
      * @param <T>
      * @return
      * @throws URISyntaxException
      * @throws MalformedURLException
      */
-    protected static <T> T exeGetJson(String requestUrl,final Class<T> clazz){
+    public static <T extends BaseResponse> T exeGetJson(String requestUrl,final TypeReference<T> ref){
         logger.info("[request]:" + requestUrl);
         return HttpClientUtils.getInstance().get(requestUrl, (response, charset) -> {
             StatusLine statusLine = response.getStatusLine();
@@ -71,34 +75,11 @@ public abstract class BaseService {
             }
             String toString = IOUtils.toString(entity.getContent(), charset);
             logger.info("[response]:" + toString);
-            return checkResult(JSON.parseObject(toString, clazz));
+            T result = JSON.parseObject(toString, ref);
+            Ensure.that("ok".equals(result.getStatus())).isTrue("查询请求报错");
+            return JSON.parseObject(toString, ref);
         });
     }
-
-
-    /**
-     * 校验请求结果
-     * @param obj 校验参数
-     * @param <T> 返回类型
-     */
-    private static <T> T checkResult(T obj) {
-        Ensure.that(obj).isNotNull("结果不能为null");
-
-        if (obj instanceof BaseResult) {
-            BaseResult error = (BaseResult) obj;
-            /** 正常的调用微信API请求*/
-            if(Objects.isNull(error.getErrcode())){
-                return obj;
-            }
-
-            /**　程序出现error.getErrcode() 不为 null时，抛出异常*/
-            logger.error("微信接口调用失败，错误码为{}，错误原因为{}",error.getErrcode(),error.getErrmsg());
-            throw new BusinessException("WX_API_REQUEST_ERROR_"+error.getErrcode());
-        }
-        return obj;
-    }
-
-
 
 
 }
