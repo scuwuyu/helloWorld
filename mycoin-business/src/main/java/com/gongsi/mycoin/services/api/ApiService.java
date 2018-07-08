@@ -1,9 +1,5 @@
 package com.gongsi.mycoin.services.api;
 
-import com.gongsi.mycoin.response.KlineResponse;
-
-import java.util.List;
-
 /**
  * Created by 吴宇 on 2018-07-07.
  */
@@ -15,5 +11,5 @@ public interface ApiService {
      * @param size
      * @return
      */
-    List<KlineResponse> kline(String symbol, String period, String size);
+    <T> T kline(String symbol, String period, String size,Class<T> clazz);
 }

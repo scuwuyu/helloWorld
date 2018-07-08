@@ -4,6 +4,7 @@
 CREATE TABLE `coin_price` (
   `id` BIGINT(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `huobi` DECIMAL(10,2) DEFAULT NULL COMMENT '火币网价格',
+  `okex` DECIMAL(10,2) DEFAULT NULL COMMENT 'okex价格',
 
   `percent` DECIMAL(10,2) NOT NULL DEFAULT '0' COMMENT '最大价差百分比',
 
@@ -24,7 +25,7 @@ CREATE TABLE `coin_account` (
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：1:有效 0：无效',
-  `comment` varchar(128) NOT NULL COMMENT '备注',
+  `comment` varchar(128) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='平台账号表';
 

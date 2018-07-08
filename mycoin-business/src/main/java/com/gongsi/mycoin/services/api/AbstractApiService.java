@@ -1,8 +1,6 @@
 package com.gongsi.mycoin.services.api;
 
-import com.alibaba.fastjson.TypeReference;
 import com.gongsi.mycoin.enums.RequestMethod;
-import com.gongsi.mycoin.response.BaseResponse;
 import com.gongsi.mycoin.services.CoinAccountservice;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,20 +20,20 @@ public abstract class AbstractApiService implements ApiService{
     protected CoinAccountservice coinAccountservice;
 
     /** get请求 */
-    protected <T extends BaseResponse> T get(String uri, Map<String, String> params, TypeReference<T> ref){
+    protected <T> T get(String uri, Map<String, String> params, Class<T> clazz){
         if (Objects.isNull(params)){
             params = new HashMap<>();
         }
-        return call(RequestMethod.GET,uri,null,params,ref);
+        return call(RequestMethod.GET,uri,null,params,clazz);
     }
 
     /** post请求 */
-    protected <T extends BaseResponse> T post(String uri, Object object, TypeReference<T> ref) {
-        return call(RequestMethod.POST, uri, object, new HashMap<>(), ref);
+    protected <T> T post(String uri, Object object, Class<T> clazz) {
+        return call(RequestMethod.POST, uri, object, new HashMap<>(), clazz);
     }
 
     /** 具体的请求方法，子类实现*/
-    protected abstract <T extends BaseResponse> T call(RequestMethod method, String uri, Object object, Map<String, String> params, TypeReference<T> ref);
+    protected abstract <T> T call(RequestMethod method, String uri, Object object, Map<String, String> params, Class<T> clazz);
 
     /**  Encode as "a=1&b=%20&c=&d=AAA" */
     protected String toQueryString(Map<String, String> params) {

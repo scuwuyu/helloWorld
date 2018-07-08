@@ -8,6 +8,8 @@ public class CoinPrice {
 
     private BigDecimal huobi;
 
+    private BigDecimal okex;
+
     private BigDecimal percent;
 
     private Date createTime;
@@ -28,6 +30,14 @@ public class CoinPrice {
 
     public void setHuobi(BigDecimal huobi) {
         this.huobi = huobi;
+    }
+
+    public BigDecimal getOkex() {
+        return okex;
+    }
+
+    public void setOkex(BigDecimal okex) {
+        this.okex = okex;
     }
 
     public BigDecimal getPercent() {

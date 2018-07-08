@@ -7,8 +7,6 @@ import com.gongsi.mycoin.core.exception.BusinessException;
 import com.gongsi.mycoin.entities.CoinAccount;
 import com.gongsi.mycoin.enums.PlatformEnum;
 import com.gongsi.mycoin.enums.RequestMethod;
-import com.gongsi.mycoin.response.BaseResponse;
-import com.gongsi.mycoin.response.KlineResponse;
 import com.gongsi.mycoin.services.http.base.BaseService;
 import org.springframework.stereotype.Service;
 
@@ -29,30 +27,28 @@ public class ApiHuoBiService extends AbstractApiService {
      * 获取K线数据
      */
     @Override
-    public List<KlineResponse> kline(String symbol, String period, String size) {
+    public <T> T kline(String symbol, String period, String size,Class<T> clazz) {
         Map<String,String> map = new HashMap<>();
         map.put("symbol", symbol);
         map.put("period", period);
         map.put("size", size);
-        BaseResponse<List<KlineResponse>> response = get(HuoBiConstants.MARKET_HISTORY_KLINE,map,new TypeReference<BaseResponse<List<KlineResponse>>>(){});
-
-        return response.getData();
+        return get(HuoBiConstants.MARKET_HISTORY_KLINE,map,clazz);
     }
 
 
 
     /** 具体的请求方法*/
     @Override
-    protected <T extends BaseResponse> T call(RequestMethod method, String uri, Object object, Map<String, String> params, TypeReference<T> ref) {
+    protected <T> T call(RequestMethod method, String uri, Object object, Map<String, String> params, Class<T> clazz) {
         CoinAccount coinAccount = coinAccountservice.selectByPlatform(PlatformEnum.HUOBI);
         Ensure.that(coinAccount).isNotNull("平台账号不能为空");
 
         createSignature(coinAccount.getAppKey(),coinAccount.getAppSecret(),method,uri,params);
         switch (method){
             case GET:
-                return BaseService.exeGetJson(HuoBiConstants.API_URL+uri+"?"+toQueryString(params),ref);
+                return BaseService.exeGetJson(HuoBiConstants.API_URL+uri+"?"+toQueryString(params),clazz);
             case POST:
-                return BaseService.exePostJson(HuoBiConstants.API_URL+uri+"?"+toQueryString(params),object,ref);
+                return BaseService.exePostJson(HuoBiConstants.API_URL+uri+"?"+toQueryString(params),object,clazz);
             default:
                 throw new BusinessException("this cannot happen");
         }

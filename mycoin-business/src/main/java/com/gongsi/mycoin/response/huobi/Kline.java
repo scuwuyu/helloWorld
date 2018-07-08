@@ -1,4 +1,4 @@
-package com.gongsi.mycoin.response;
+package com.gongsi.mycoin.response.huobi;
 
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  * Created by 吴宇 on 2018-07-07.
  */
 @Data
-public class KlineResponse {
+public class Kline {
     private int id;
     /** 成交量*/
     private BigDecimal amount;

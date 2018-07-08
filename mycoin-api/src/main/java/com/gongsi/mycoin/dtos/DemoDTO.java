@@ -4,5 +4,5 @@ import java.io.Serializable;
 
 /**
  */
-public class SaveUserDto implements Serializable {
+public class DemoDTO implements Serializable {
 }

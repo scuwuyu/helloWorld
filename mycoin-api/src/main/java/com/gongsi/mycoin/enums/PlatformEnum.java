@@ -6,7 +6,9 @@ package com.gongsi.mycoin.enums;
  */
 
 public enum  PlatformEnum {
-    HUOBI(1,"火币网");
+    HUOBI(1,"火币网"),
+    OKEX(2,"OKEx"),
+    ;
 
     PlatformEnum(Integer id, String desc) {
         this.id = id;

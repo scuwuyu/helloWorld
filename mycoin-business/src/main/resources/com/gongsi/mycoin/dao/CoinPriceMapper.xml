@@ -4,12 +4,13 @@
   <resultMap id="BaseResultMap" type="com.gongsi.mycoin.entities.CoinPrice" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="huobi" property="huobi" jdbcType="DECIMAL" />
+    <result column="okex" property="okex" jdbcType="DECIMAL" />
     <result column="percent" property="percent" jdbcType="DECIMAL" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, huobi, percent, create_time, update_time
+    id, huobi, okex, percent, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -22,10 +23,12 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.gongsi.mycoin.entities.CoinPrice" >
-    insert into coin_price (id, huobi, percent, 
-      create_time, update_time)
-    values (#{id,jdbcType=BIGINT}, #{huobi,jdbcType=DECIMAL}, #{percent,jdbcType=DECIMAL}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    insert into coin_price (id, huobi, okex, 
+      percent, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{huobi,jdbcType=DECIMAL}, #{okex,jdbcType=DECIMAL}, 
+      #{percent,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.gongsi.mycoin.entities.CoinPrice" >
     insert into coin_price
@@ -35,6 +38,9 @@
       </if>
       <if test="huobi != null" >
         huobi,
+      </if>
+      <if test="okex != null" >
+        okex,
       </if>
       <if test="percent != null" >
         percent,
@@ -53,6 +59,9 @@
       <if test="huobi != null" >
         #{huobi,jdbcType=DECIMAL},
       </if>
+      <if test="okex != null" >
+        #{okex,jdbcType=DECIMAL},
+      </if>
       <if test="percent != null" >
         #{percent,jdbcType=DECIMAL},
       </if>
@@ -70,6 +79,9 @@
       <if test="huobi != null" >
         huobi = #{huobi,jdbcType=DECIMAL},
       </if>
+      <if test="okex != null" >
+        okex = #{okex,jdbcType=DECIMAL},
+      </if>
       <if test="percent != null" >
         percent = #{percent,jdbcType=DECIMAL},
       </if>
@@ -85,6 +97,7 @@
   <update id="updateByPrimaryKey" parameterType="com.gongsi.mycoin.entities.CoinPrice" >
     update coin_price
     set huobi = #{huobi,jdbcType=DECIMAL},
+      okex = #{okex,jdbcType=DECIMAL},
       percent = #{percent,jdbcType=DECIMAL},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
