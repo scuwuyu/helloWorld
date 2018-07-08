@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration scan="false" scanPeriod="60 seconds" debug="false">
-    <property name="LOG_HOME" value="/home/www/logs/mini"/>
+    <property name="LOG_HOME" value="/home/www/logs/mycoin"/>
     <property name="LOG_MAX_HISTORY" value="20"/>
 
-    <property name="LOG_ALL_HOME" value="${LOG_HOME}/mini.log"/>
-    <property name="LOG_ALL_ROLL_HOME" value="${LOG_HOME}/mini.log.%d{yyyy-MM-dd}"/>
-    <property name="LOG_ERROR_HOME" value="${LOG_HOME}/mini-error.log"/>
-    <property name="LOG_ERROR_ROLL_HOME" value="${LOG_HOME}/mini-error.log.%d{yyyy-MM-dd}"/>
+    <property name="LOG_ALL_HOME" value="${LOG_HOME}/mycoin.log"/>
+    <property name="LOG_ALL_ROLL_HOME" value="${LOG_HOME}/mycoin.log.%d{yyyy-MM-dd}"/>
+    <property name="LOG_ERROR_HOME" value="${LOG_HOME}/mycoin-error.log"/>
+    <property name="LOG_ERROR_ROLL_HOME" value="${LOG_HOME}/mycoin-error.log.%d{yyyy-MM-dd}"/>
 
     <property name="ENCODER_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss}][%-5p]%file:%line - %m%n"/>
 

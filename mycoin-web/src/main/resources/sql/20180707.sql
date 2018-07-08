@@ -1,8 +1,14 @@
---  增加小程序数据库mini
---  用户表(包括C端和B端)
-CREATE TABLE `user` (
+--  比特币行情项目
+
+
+--  各个平台的比特币价格
+CREATE TABLE `price` (
   `id` BIGINT(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `user_id` varchar(32) NOT NULL COMMENT '用户id',
+  `huobi` DECIMAL(10,2) DEFAULT NULL COMMENT '火币网价格',
+
+  `percent` DECIMAL(10,2) NOT NULL DEFAULT '0' COMMENT '最大价差百分比',
+
+
   `nickName` varchar(64) NOT NULL COMMENT '用户昵称',
   `open_id` varchar(32) NOT NULL COMMENT '微信openid',
   `avatar_url` varchar(128) DEFAULT NULL COMMENT '用户头像',
@@ -10,9 +16,8 @@ CREATE TABLE `user` (
 
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `modify_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  PRIMARY KEY (`id`),
-  KEY `idx_user_id` (`user_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表(包括C端和B端)';
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='价格行情表';
 
 --  会员资费类型表
 CREATE TABLE `member_type` (

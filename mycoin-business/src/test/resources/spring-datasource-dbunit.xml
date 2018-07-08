@@ -42,7 +42,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="typeAliasesPackage" value="com.gongsi.demo.entities"/>
         <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
-        <property name="mapperLocations" value="classpath:/com/gongsi/mini/dao/*DAO.xml"/>
+        <property name="mapperLocations" value="classpath:/com/gongsi/mycoin/dao/*Mapper.xml"/>
         <!--<property name="plugins">-->
             <!--<array>-->
                 <!--&lt;!&ndash;page interceptor&ndash;&gt;-->

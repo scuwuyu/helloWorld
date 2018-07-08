@@ -44,6 +44,7 @@ public class HttpClientUtils {
             HttpPost httpPost = new HttpPost(url);
             httpPost.addHeader("Content-Type", contentType);
             httpPost.addHeader("charset", "UTF-8");
+            httpPost.addHeader("Accept-Language","zh-cn");
 
             StringEntity strEntity = new StringEntity(message, charset);
             httpPost.setEntity(strEntity);
@@ -70,6 +71,8 @@ public class HttpClientUtils {
         try {
             client = getCloseableHttpClient(3000,3000);
             HttpGet httpGet = new HttpGet(url);
+            httpGet.addHeader("Content-Type","application/x-www-form-urlencoded");
+            httpGet.addHeader("Accept-Language","zh-cn");
             response = client.execute(httpGet);
 
             checkResponse(url, response,null);

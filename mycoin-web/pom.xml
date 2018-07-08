@@ -152,7 +152,7 @@
 
     </dependencies>
     <build>
-        <finalName>mini-web</finalName>
+        <finalName>mycoin-web</finalName>
 
         <plugins>
             <plugin>
