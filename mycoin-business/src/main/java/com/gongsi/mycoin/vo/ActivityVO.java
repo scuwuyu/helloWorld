@@ -10,7 +10,7 @@ import java.util.Objects;
  * Created by 吴宇 on 2018-05-23.
  */
 @Data
-public class ActivityVO extends BaseVO{
+public class ActivityVO{
     /** 活动id */
     private Long id;
 
@@ -30,8 +30,6 @@ public class ActivityVO extends BaseVO{
 
     /** 状态：1:进行中 5：结束*/
     private Integer status;
-    /** c端查看时,增加用户信息*/
-    private UserVO userInfo;
 
     public void check(){
         Ensure.that(name).isNotEmpty("活动名称不能为空");

@@ -2,7 +2,6 @@ package com.gongsi.mycoin.utils;
 
 import com.gongsi.mycoin.core.ensure.Ensure;
 import com.gongsi.mycoin.core.utils.IdGenerator;
-import com.gongsi.mycoin.entities.Goods;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -11,9 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class TestUtils {
     public static void main(String[] args) {
-        Goods goods = new Goods();
-        goods.setPicture("dasdas");
-        Ensure.that(goods.getPicture()).isNull("打错了");
+
 
 
     }

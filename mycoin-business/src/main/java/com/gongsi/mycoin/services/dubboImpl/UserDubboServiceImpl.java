@@ -2,7 +2,6 @@ package com.gongsi.mycoin.services.dubboImpl;
 
 import com.gongsi.mycoin.dtos.*;
 import com.gongsi.mycoin.apis.UserDubboService;
-import com.gongsi.mycoin.entities.User;
 import com.gongsi.mycoin.utils.BeanMapper;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +28,7 @@ public class UserDubboServiceImpl implements UserDubboService {
     }
 
     public Long saveUser(SaveUserDto dto) {
-        User user = BeanMapper.map(dto, User.class);
+
         return null;
     }
 

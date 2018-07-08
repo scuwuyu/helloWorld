@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gongsi.mycoin.dao.CoinAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.gongsi.mycoin.entities.CoinAccount" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="app_key" property="appKey" jdbcType="VARCHAR" />
+    <result column="app_secret" property="appSecret" jdbcType="VARCHAR" />
+    <result column="platform" property="platform" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, app_key, app_secret, platform, create_time, update_time, status, comment
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from coin_account
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from coin_account
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.gongsi.mycoin.entities.CoinAccount" >
+    insert into coin_account (id, user_id, app_key, 
+      app_secret, platform, create_time, 
+      update_time, status, comment
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{appKey,jdbcType=VARCHAR}, 
+      #{appSecret,jdbcType=VARCHAR}, #{platform,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=BIT}, #{comment,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gongsi.mycoin.entities.CoinAccount" >
+    insert into coin_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="appKey != null" >
+        app_key,
+      </if>
+      <if test="appSecret != null" >
+        app_secret,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="appKey != null" >
+        #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="appSecret != null" >
+        #{appSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gongsi.mycoin.entities.CoinAccount" >
+    update coin_account
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="appKey != null" >
+        app_key = #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="appSecret != null" >
+        app_secret = #{appSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gongsi.mycoin.entities.CoinAccount" >
+    update coin_account
+    set user_id = #{userId,jdbcType=VARCHAR},
+      app_key = #{appKey,jdbcType=VARCHAR},
+      app_secret = #{appSecret,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=BIT},
+      comment = #{comment,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

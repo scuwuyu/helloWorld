@@ -2,18 +2,24 @@ package com.gongsi.mycoin.response;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * Created by 吴宇 on 2018-07-07.
  */
 @Data
 public class KlineResponse {
     private int id;
-    private double amount;
+    /** 成交量*/
+    private BigDecimal amount;
+    /** 成交笔数*/
     private int count;
-    private double open;
-    private int close;
-    private int low;
-    private int high;
-    private double vol;
+    /** 成交额*/
+    private BigDecimal vol;
+
+    private BigDecimal open;
+    private BigDecimal close;
+    private BigDecimal low;
+    private BigDecimal high;
 
 }
