@@ -3,6 +3,7 @@ package com.gongsi.mycoin.utils;
 import com.gongsi.mycoin.core.ensure.Ensure;
 import com.gongsi.mycoin.core.utils.IdGenerator;
 
+import java.math.BigDecimal;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -11,7 +12,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class TestUtils {
     public static void main(String[] args) {
 
-
+        System.out.println(new BigDecimal(10).divide(new BigDecimal(3),2));
+        System.out.println(new BigDecimal(10).divide(new BigDecimal(3),2,BigDecimal.ROUND_HALF_UP));
 
     }
 

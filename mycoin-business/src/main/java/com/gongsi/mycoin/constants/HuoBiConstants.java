@@ -9,6 +9,8 @@ import java.time.format.DateTimeFormatter;
 public class HuoBiConstants {
     /**
      * public static final String  API_HOST = "api.huobi.pro";
+     *
+     * 一级域名huobi.pro和huobipro.com都可以，一个不好用可切换另一个
      */
     public static final String  API_HOST = "api.hadax.com";
     public static final String  API_URL = "https://"+API_HOST;

@@ -1,7 +1,9 @@
 package com.gongsi.mycoin.services.api;
 
 import com.gongsi.mycoin.constants.OKExConstants;
+import com.gongsi.mycoin.core.exception.BusinessException;
 import com.gongsi.mycoin.enums.RequestMethod;
+import com.gongsi.mycoin.services.http.base.BaseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,13 @@ public class ApiOKExService extends AbstractApiService {
     /** 具体的请求方法*/
     @Override
     protected <T> T call(RequestMethod method, String uri, Object object, Map<String, String> params, Class<T> clazz) {
-        return null;
+        switch (method){
+            case GET:
+                return BaseService.exeGetJson(OKExConstants.API_URL+uri+"?"+toQueryString(params),clazz);
+            case POST:
+                return BaseService.exePostJson(OKExConstants.API_URL+uri+"?"+toQueryString(params),object,clazz);
+            default:
+                throw new BusinessException("okex this cannot happen");
+        }
     }
 }
